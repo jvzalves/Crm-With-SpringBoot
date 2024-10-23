@@ -2,7 +2,6 @@ package com.jvzalves.crm.entities;
 
 import java.util.Objects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -23,32 +22,27 @@ public class Contact {
 		@ManyToOne(fetch = FetchType.LAZY)
 		@JoinColumn(name = "enterprise_id")
 		private Enterprise enterprise;
-	
-		@Column(columnDefinition = "TEXT")
-		private String fullName;
-	
-		@Column(columnDefinition = "TEXT")
-		private String email;
-	
+		
 		@ManyToOne
 		@JoinColumn(name = "responsible_id") 
 	    private Responsible responsible;
-
+	
+		private String fullName;
+		private String email;
 		private String url;
 		private String linkedin;
-		private String position;
 		private String phone;
 
 		public Contact () {}
 
-		public Contact(Long id, Enterprise enterprise, String fullName, String email, String url, String linkedin, String position, String phone) {
+		public Contact(Long id, Enterprise enterprise, Responsible responsible, String fullName, String email, String url, String linkedin, String phone) {
 			this.id = id;
 			this.enterprise = enterprise;
+			this.responsible = responsible;
 			this.fullName = fullName;
 			this.email = email;
 			this.url = url;
 			this.linkedin = linkedin;
-			this.position = position;
 			this.phone = phone;
 		}
 
@@ -66,6 +60,14 @@ public class Contact {
 
 		public void setEnterprise(Enterprise enterprise) {
 			this.enterprise = enterprise;
+		}
+
+		public Responsible getResponsible() {
+			return responsible;
+		}
+
+		public void setResponsible(Responsible responsible) {
+			this.responsible = responsible;
 		}
 
 		public String getFullName() {
@@ -100,14 +102,6 @@ public class Contact {
 			this.linkedin = linkedin;
 		}
 
-		public String getPosition() {
-			return position;
-		}
-
-		public void setPosition(String position) {
-			this.position = position;
-		}
-
 		public String getPhone() {
 			return phone;
 		}
@@ -118,7 +112,7 @@ public class Contact {
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(email, enterprise, fullName, id, linkedin, phone, position, url);
+			return Objects.hash(email, enterprise, fullName, id, linkedin, phone, responsible, url);
 		}
 
 		@Override
@@ -133,7 +127,8 @@ public class Contact {
 			return Objects.equals(email, other.email) && Objects.equals(enterprise, other.enterprise)
 					&& Objects.equals(fullName, other.fullName) && Objects.equals(id, other.id)
 					&& Objects.equals(linkedin, other.linkedin) && Objects.equals(phone, other.phone)
-					&& Objects.equals(position, other.position) && Objects.equals(url, other.url);
+					&& Objects.equals(responsible, other.responsible) && Objects.equals(url, other.url);
 		}
+        
 }               
  
