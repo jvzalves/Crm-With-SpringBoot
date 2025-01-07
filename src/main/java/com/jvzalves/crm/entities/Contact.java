@@ -19,7 +19,7 @@ public class Contact {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long id;
 	
-		@ManyToOne(fetch = FetchType.LAZY)
+		@ManyToOne(fetch = FetchType.EAGER)
 		@JoinColumn(name = "enterprise_id")
 		private Enterprise enterprise;
 		

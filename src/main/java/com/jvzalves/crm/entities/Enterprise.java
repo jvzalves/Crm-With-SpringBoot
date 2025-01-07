@@ -18,70 +18,70 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_enterprise")
 public class Enterprise {
-		
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Long id;
-	
-		@OneToMany(mappedBy = "enterprise", fetch = FetchType.LAZY)
-		private Set<Contact> contacts = new HashSet<>();
-	
-		@Column(name = "name_enterprise")
-		private String name;
-	
-		@ManyToOne
-		@JoinColumn(name = "responsible_id") 
-		private Responsible responsible;
 
-		public Enterprise() {
-		}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-		public Enterprise(Long id, Set<Contact> contacts, String name) {
-			this.id = id;
-			this.contacts = contacts;
-			this.name = name;
-		}
+	@OneToMany(mappedBy = "enterprise", fetch = FetchType.EAGER)
+	private Set<Contact> contacts = new HashSet<>();
 
-		public Long getId() {
-			return id;
-		}
+	@Column(name = "name_enterprise")
+	private String name;
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	@ManyToOne
+	@JoinColumn(name = "responsible_id")
+	private Responsible responsible;
 
-		public Set<Contact> getContacts() {
-			return contacts;
-		}
+	public Enterprise() {
+	}
 
-		public void setContacts(Set<Contact> contacts) {
-			this.contacts = contacts;
-		}
+	public Enterprise(Long id, Set<Contact> contacts, String name) {
+		this.id = id;
+		this.contacts = contacts;
+		this.name = name;
+	}
 
-		public String getName() {
-			return name;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public void setName(String name) {
-			this.name = name;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		@Override
-		public int hashCode() {
-			return Objects.hash(contacts, id, name);
-		}
+	public Set<Contact> getContacts() {
+		return contacts;
+	}
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Enterprise other = (Enterprise) obj;
-			return Objects.equals(contacts, other.contacts) && Objects.equals(id, other.id)
-					&& Objects.equals(name, other.name);
-		}
-	
+	public void setContacts(Set<Contact> contacts) {
+		this.contacts = contacts;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(contacts, id, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Enterprise other = (Enterprise) obj;
+		return Objects.equals(contacts, other.contacts) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name);
+	}
+
 }
