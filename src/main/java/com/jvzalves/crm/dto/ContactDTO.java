@@ -5,14 +5,12 @@ import java.util.Objects;
 import org.springframework.beans.BeanUtils;
 
 import com.jvzalves.crm.entities.Contact;
-import com.jvzalves.crm.entities.Enterprise;
-import com.jvzalves.crm.entities.Responsible;
 
 public class ContactDTO {
   
 	private Long id;
-	private Enterprise enterprise;
-    private Responsible responsible;
+	private String nameEnterprise;
+    private String nameResponsible;
 	private String fullName;
 	private String email;
 	private String url;
@@ -23,6 +21,8 @@ public class ContactDTO {
 
 	public ContactDTO(Contact entity) {
 		BeanUtils.copyProperties(entity, this);
+		this.nameEnterprise = (entity.getEnterprise() != null) ? entity.getEnterprise().getName() : null;
+	    this.nameResponsible = (entity.getResponsible() != null) ? entity.getResponsible().getUser() : null;
 	}
 
 	public Long getId() {
@@ -33,20 +33,20 @@ public class ContactDTO {
 		this.id = id;
 	}
 
-	public Enterprise getEnterprise() {
-		return enterprise;
+	public String getNameEnterprise() {
+		return nameEnterprise;
 	}
 
-	public void setEnterprise(Enterprise enterprise) {
-		this.enterprise = enterprise;
+	public void setNameEnterprise(String nameEnterprise) {
+		this.nameEnterprise = nameEnterprise;
 	}
 
-	public Responsible getResponsible() {
-		return responsible;
+	public String getNameResposible() {
+		return nameResponsible;
 	}
 
-	public void setResponsible(Responsible responsible) {
-		this.responsible = responsible;
+	public void setNameResposible(String nameResposible) {
+		this.nameResponsible = nameResposible;
 	}
 
 	public String getFullName() {
@@ -91,7 +91,7 @@ public class ContactDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, enterprise, fullName, id, linkedin, phone, responsible, url);
+		return Objects.hash(email, fullName, id, linkedin, nameEnterprise, nameResponsible, phone, url);
 	}
 
 	@Override
@@ -103,9 +103,11 @@ public class ContactDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ContactDTO other = (ContactDTO) obj;
-		return Objects.equals(email, other.email) && Objects.equals(enterprise, other.enterprise)
-				&& Objects.equals(fullName, other.fullName) && Objects.equals(id, other.id)
-				&& Objects.equals(linkedin, other.linkedin) && Objects.equals(phone, other.phone)
-				&& Objects.equals(responsible, other.responsible) && Objects.equals(url, other.url);
+		return Objects.equals(email, other.email) && Objects.equals(fullName, other.fullName)
+				&& Objects.equals(id, other.id) && Objects.equals(linkedin, other.linkedin)
+				&& Objects.equals(nameEnterprise, other.nameEnterprise)
+				&& Objects.equals(nameResponsible, other.nameResponsible) && Objects.equals(phone, other.phone)
+				&& Objects.equals(url, other.url);
 	}
+
 }
