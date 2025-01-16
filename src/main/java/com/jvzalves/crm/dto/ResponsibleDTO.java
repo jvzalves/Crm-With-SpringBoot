@@ -1,27 +1,17 @@
 package com.jvzalves.crm.dto;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import org.springframework.beans.BeanUtils;
-
-import com.jvzalves.crm.entities.Contact;
-import com.jvzalves.crm.entities.Enterprise;
-import com.jvzalves.crm.entities.Responsible;
 
 public class ResponsibleDTO {
 	
 	private Long id;
 	private String user;
-
-	private Set<Enterprise> enterprises = new HashSet<>();
-	private Set<Contact> contacts = new HashSet<>();
-    
+	
 	public ResponsibleDTO () {}
 	
-	public ResponsibleDTO(Responsible entity) {
-		BeanUtils.copyProperties(entity, this);
+	public ResponsibleDTO(Long id, String user) {
+		this.id = id;
+		this.user = user;
 	}
 
 	public Long getId() {
@@ -40,25 +30,9 @@ public class ResponsibleDTO {
 		this.user = user;
 	}
 
-	public Set<Enterprise> getEnterprises() {
-		return enterprises;
-	}
-
-	public void setEnterprises(Set<Enterprise> enterprises) {
-		this.enterprises = enterprises;
-	}
-
-	public Set<Contact> getContacts() {
-		return contacts;
-	}
-
-	public void setContacts(Set<Contact> contacts) {
-		this.contacts = contacts;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(contacts, enterprises, id, user);
+		return Objects.hash(id, user);
 	}
 
 	@Override
@@ -70,8 +44,6 @@ public class ResponsibleDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ResponsibleDTO other = (ResponsibleDTO) obj;
-		return Objects.equals(contacts, other.contacts) && Objects.equals(enterprises, other.enterprises)
-				&& Objects.equals(id, other.id) && Objects.equals(user, other.user);
+		return Objects.equals(id, other.id) && Objects.equals(user, other.user);
 	}
-	
 }
