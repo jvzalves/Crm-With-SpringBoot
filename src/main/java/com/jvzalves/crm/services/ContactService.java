@@ -5,10 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.jvzalves.crm.dto.ContactDTO;
 import com.jvzalves.crm.entities.Contact;
 import com.jvzalves.crm.repositories.ContactRepository;
+
+import exceptions.RequiredObjectIsNullNotFoundException;
 
 @Service
 public class ContactService {
@@ -29,4 +33,25 @@ public class ContactService {
 		List<ContactDTO> dto = result.stream().map(x -> new ContactDTO(x)).toList();
 		return dto;
 	}
+
+	@PostMapping
+	@Transactional
+	public ContactDTO createContact(@RequestBody Contact contact) {
+		if (contact == null) {
+			throw new RequiredObjectIsNullNotFoundException("It is not allowed to persist a null object");
+		}
+		try {
+			Contact result = contactRepository.save(contact);
+			ContactDTO dto = new ContactDTO(result);
+			return dto;
+		} catch (Exception e) {
+			throw new RequiredObjectIsNullNotFoundException("Error creating contact");
+		}
+	}
 }
+
+
+
+
+
+

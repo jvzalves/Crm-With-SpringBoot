@@ -2,28 +2,31 @@ package com.jvzalves.crm.dto;
 
 import java.util.Objects;
 
-import org.springframework.beans.BeanUtils;
-
 import com.jvzalves.crm.entities.Contact;
 
 public class ContactDTO {
-  
-	private Long id;
-	private String nameEnterprise;
-    private String nameResponsible;
-	private String fullName;
-	private String email;
-	private String url;
-	private String linkedin;
-	private String phone;
+	  
+    private Long id;
+    private Long enterpriseId;
+    private Long responsibleId;
+    private String fullName;
+    private String email;
+    private String url;
+    private String linkedin;
+    private String phone;
 
-	public ContactDTO () {}
+    public ContactDTO() {}
 
-	public ContactDTO(Contact entity) {
-		BeanUtils.copyProperties(entity, this);
-		this.nameEnterprise = (entity.getEnterprise() != null) ? entity.getEnterprise().getName() : null;
-	    this.nameResponsible = (entity.getResponsible() != null) ? entity.getResponsible().getUser() : null;
-	}
+    public ContactDTO(Contact entity) {
+        this.id = entity.getId();
+        this.enterpriseId = (entity.getEnterprise() != null) ? entity.getEnterprise().getId() : null;
+        this.responsibleId = (entity.getResponsible() != null) ? entity.getResponsible().getId() : null;
+        this.fullName = entity.getFullName();
+        this.email = entity.getEmail();
+        this.url = entity.getUrl();
+        this.linkedin = entity.getLinkedin();
+        this.phone = entity.getPhone();
+    }
 
 	public Long getId() {
 		return id;
@@ -33,20 +36,20 @@ public class ContactDTO {
 		this.id = id;
 	}
 
-	public String getNameEnterprise() {
-		return nameEnterprise;
+	public Long getEnterpriseId() {
+		return enterpriseId;
 	}
 
-	public void setNameEnterprise(String nameEnterprise) {
-		this.nameEnterprise = nameEnterprise;
+	public void setEnterpriseId(Long enterpriseId) {
+		this.enterpriseId = enterpriseId;
 	}
 
-	public String getNameResposible() {
-		return nameResponsible;
+	public Long getResponsibleId() {
+		return responsibleId;
 	}
 
-	public void setNameResposible(String nameResposible) {
-		this.nameResponsible = nameResposible;
+	public void setResponsibleId(Long responsibleId) {
+		this.responsibleId = responsibleId;
 	}
 
 	public String getFullName() {
@@ -91,7 +94,7 @@ public class ContactDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, fullName, id, linkedin, nameEnterprise, nameResponsible, phone, url);
+		return Objects.hash(email, enterpriseId, fullName, id, linkedin, phone, responsibleId, url);
 	}
 
 	@Override
@@ -103,11 +106,9 @@ public class ContactDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ContactDTO other = (ContactDTO) obj;
-		return Objects.equals(email, other.email) && Objects.equals(fullName, other.fullName)
-				&& Objects.equals(id, other.id) && Objects.equals(linkedin, other.linkedin)
-				&& Objects.equals(nameEnterprise, other.nameEnterprise)
-				&& Objects.equals(nameResponsible, other.nameResponsible) && Objects.equals(phone, other.phone)
-				&& Objects.equals(url, other.url);
+		return Objects.equals(email, other.email) && Objects.equals(enterpriseId, other.enterpriseId)
+				&& Objects.equals(fullName, other.fullName) && Objects.equals(id, other.id)
+				&& Objects.equals(linkedin, other.linkedin) && Objects.equals(phone, other.phone)
+				&& Objects.equals(responsibleId, other.responsibleId) && Objects.equals(url, other.url);
 	}
-
 }
