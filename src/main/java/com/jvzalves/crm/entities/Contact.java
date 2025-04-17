@@ -2,6 +2,7 @@ package com.jvzalves.crm.entities;
 
 import java.util.Objects;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +16,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_contact")
 public class Contact {
-
+        
+	    @Nonnull
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long id;

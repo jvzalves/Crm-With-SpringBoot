@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.jvzalves.crm.dto.ContactDTO;
 import com.jvzalves.crm.entities.Contact;
+import com.jvzalves.crm.entities.Enterprise;
+import com.jvzalves.crm.entities.Responsible;
 import com.jvzalves.crm.repositories.ContactRepository;
+import com.jvzalves.crm.repositories.EnterpriseRepository;
+import com.jvzalves.crm.repositories.ResponsibleRepository;
 
 import exceptions.RequiredObjectIsNullNotFoundException;
 
@@ -19,6 +23,12 @@ public class ContactService {
    
 	@Autowired
 	private ContactRepository contactRepository;
+	
+	@Autowired
+	private EnterpriseRepository enterpriseRepository;
+	
+	@Autowired
+	private ResponsibleRepository responsibleRepository;
 	
 	@Transactional(readOnly = true )
 		public ContactDTO findById(Long id) {
@@ -36,17 +46,40 @@ public class ContactService {
 
 	@PostMapping
 	@Transactional
-	public ContactDTO createContact(@RequestBody Contact contact) {
-		if (contact == null) {
-			throw new RequiredObjectIsNullNotFoundException("It is not allowed to persist a null object");
-		}
-		try {
-			Contact result = contactRepository.save(contact);
-			ContactDTO dto = new ContactDTO(result);
-			return dto;
-		} catch (Exception e) {
-			throw new RequiredObjectIsNullNotFoundException("Error creating contact");
-		}
+	public ContactDTO createContact(@RequestBody ContactDTO dto) {
+	    if (dto == null) {
+	        throw new RequiredObjectIsNullNotFoundException("It is not allowed to persist a null object");
+	    }
+	    try {
+	    	
+	        Enterprise enterprise = null;
+	        Responsible responsible = null;
+
+	        if (dto.getEnterpriseId() != null) {
+	            enterprise = enterpriseRepository.findById(dto.getEnterpriseId())
+	                .orElseThrow(() -> new RuntimeException("Enterprise not found"));
+	        }
+
+	        if (dto.getResponsibleId() != null) {
+	            responsible = responsibleRepository.findById(dto.getResponsibleId())
+	                .orElseThrow(() -> new RuntimeException("Responsible not found"));
+	        }
+	        
+	        Contact contact = new Contact();
+	        contact.setFullName(dto.getFullName());
+	        contact.setEmail(dto.getEmail());
+	        contact.setPhone(dto.getPhone());
+	        contact.setUrl(dto.getUrl());
+	        contact.setLinkedin(dto.getLinkedin());
+	        contact.setEnterprise(enterprise);
+	        contact.setResponsible(responsible);
+
+	        Contact result = contactRepository.save(contact);
+	        return new ContactDTO(result);
+
+	    } catch (Exception e) {
+	        throw new RequiredObjectIsNullNotFoundException("Error creating contact");
+	    }
 	}
 }
 

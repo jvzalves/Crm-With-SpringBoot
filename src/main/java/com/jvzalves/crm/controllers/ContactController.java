@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jvzalves.crm.dto.ContactDTO;
-import com.jvzalves.crm.entities.Contact;
 import com.jvzalves.crm.services.ContactService;
 
 @RestController
@@ -36,7 +35,7 @@ public class ContactController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ContactDTO> createContact(@RequestBody Contact contact){
+	public ResponseEntity<ContactDTO> createContact(@RequestBody ContactDTO contact){
 		   ContactDTO dto = contactService.createContact(contact);
 		   return new ResponseEntity<>(dto, HttpStatus.CREATED);
 	}
