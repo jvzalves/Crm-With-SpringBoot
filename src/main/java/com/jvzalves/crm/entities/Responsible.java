@@ -86,5 +86,4 @@ public class Responsible {
 		return Objects.equals(contacts, other.contacts) && Objects.equals(enterprises, other.enterprises)
 				&& Objects.equals(id, other.id) && Objects.equals(user, other.user);
 	}
-    
 }

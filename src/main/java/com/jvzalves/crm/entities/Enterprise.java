@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_enterprise")
 public class Enterprise {
-    
+
 	@Nonnull
 	@Id
 	private Long id;
@@ -32,8 +32,7 @@ public class Enterprise {
 	@JoinColumn(name = "responsible_id")
 	private Responsible responsible;
 
-	public Enterprise() {
-	}
+	public Enterprise() {}
 
 	public Enterprise(Long id, Set<Contact> contacts, String name) {
 		this.id = id;
