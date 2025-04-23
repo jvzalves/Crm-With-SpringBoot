@@ -1,6 +1,7 @@
 package com.jvzalves.crm.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,4 +73,15 @@ public class ContactService {
 			throw new RequiredObjectIsNullNotFoundException("Error updating contact");
 		}
 	}
+	
+	@Transactional
+	public void deleteById(Long id) {
+		Optional<Contact> contact = contactRepository.findById(id);
+		if (contact.isPresent()) {
+			contactRepository.deleteById(id);
+		} else {
+			throw new RequiredObjectIsNullNotFoundException("contact not found for this id : " + id);
+		}
+	}
 }
+
