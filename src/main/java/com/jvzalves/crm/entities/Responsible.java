@@ -21,10 +21,10 @@ public class Responsible {
 
 	@Column(name = "responsible_user")
 	private String user;
-
+    
 	@OneToMany(mappedBy = "responsible") 
 	private Set<Enterprise> enterprises = new HashSet<>();
-
+   
 	@OneToMany(mappedBy = "responsible")
 	private Set<Contact> contacts = new HashSet<>();
 	

@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.jvzalves.crm.dto.EnterpriseDTO;
 import com.jvzalves.crm.entities.Enterprise;
 import com.jvzalves.crm.repositories.EnterpriseRepository;
+
+import exceptions.RequiredObjectIsNullNotFoundException;
 
 @Service
 public class EnterpriseService {
@@ -28,5 +31,18 @@ public class EnterpriseService {
 		List<Enterprise> result = enterpriseRepository.findAll();
 		List<EnterpriseDTO> dto = result.stream().map(x -> new EnterpriseDTO(x)).toList();
 		return dto;
+	}
+	
+	@Transactional
+	public EnterpriseDTO createEnterprise(@RequestBody Enterprise enterprise) {
+		if (enterprise == null) {
+			throw new RequiredObjectIsNullNotFoundException("It is not allowed to persist a null object");
+		}
+		try {
+			Enterprise result = enterpriseRepository.save(enterprise);
+			return new EnterpriseDTO(result);
+		} catch (Exception e) {
+			throw new RequiredObjectIsNullNotFoundException("Error add enterprise");
+		}
 	}
 }

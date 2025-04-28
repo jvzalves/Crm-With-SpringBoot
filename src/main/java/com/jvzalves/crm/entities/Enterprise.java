@@ -22,22 +22,23 @@ public class Enterprise {
 	@Id
 	private Long id;
 
-	@OneToMany(mappedBy = "enterprise", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "enterprise", fetch = FetchType.LAZY)
 	private Set<Contact> contacts = new HashSet<>();
 
 	@Column(name = "name_enterprise")
 	private String name;
-
+    
 	@ManyToOne
 	@JoinColumn(name = "responsible_id")
 	private Responsible responsible;
 
 	public Enterprise() {}
 
-	public Enterprise(Long id, Set<Contact> contacts, String name) {
+	public Enterprise(Long id, Set<Contact> contacts, String name, Responsible responsible) {
 		this.id = id;
 		this.contacts = contacts;
 		this.name = name;
+		this.responsible = responsible;
 	}
 
 	public Long getId() {
@@ -64,9 +65,17 @@ public class Enterprise {
 		this.name = name;
 	}
 
+	public Responsible getResponsible() {
+		return responsible;
+	}
+
+	public void setResponsible(Responsible responsible) {
+		this.responsible = responsible;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(contacts, id, name);
+		return Objects.hash(contacts, id, name, responsible);
 	}
 
 	@Override
@@ -79,7 +88,6 @@ public class Enterprise {
 			return false;
 		Enterprise other = (Enterprise) obj;
 		return Objects.equals(contacts, other.contacts) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name);
+				&& Objects.equals(name, other.name) && Objects.equals(responsible, other.responsible);
 	}
-
 }
