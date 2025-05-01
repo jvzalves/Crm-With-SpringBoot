@@ -2,6 +2,10 @@ package com.jvzalves.crm.dto;
 
 import java.util.Objects;
 
+import org.springframework.beans.BeanUtils;
+
+import com.jvzalves.crm.entities.Responsible;
+
 public class ResponsibleDTO {
 	
 	private Long id;
@@ -9,9 +13,8 @@ public class ResponsibleDTO {
 	
 	public ResponsibleDTO () {}
 	
-	public ResponsibleDTO(Long id, String user) {
-		this.id = id;
-		this.user = user;
+	public ResponsibleDTO(Responsible entity) {
+		 BeanUtils.copyProperties(entity, this);
 	}
 
 	public Long getId() {
