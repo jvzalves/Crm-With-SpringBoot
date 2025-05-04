@@ -2,7 +2,6 @@ package com.jvzalves.crm.entities;
 
 import java.util.Objects;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +15,6 @@ import jakarta.persistence.Table;
 @Table(name = "tb_contact")
 public class Contact {
 
-	@Nonnull
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -25,22 +23,17 @@ public class Contact {
 	@JoinColumn(name = "enterprise_id")
 	private Enterprise enterprise;
 
-	@ManyToOne
-	@JoinColumn(name = "responsible_id")
-	private Responsible responsible;
-
 	private String fullName;
 	private String email;
 	private String url;
 	private String linkedin;
 	private String phone;
 
-	public Contact() {	}
+	public Contact() {}
 
-	public Contact(Long id, Enterprise enterprise, Responsible responsible, String fullName, String email, String url, String linkedin, String phone) {
+	public Contact(Long id, Enterprise enterprise, String fullName, String email, String url, String linkedin, String phone) {
 		this.id = id;
 		this.enterprise = enterprise;
-		this.responsible = responsible;
 		this.fullName = fullName;
 		this.email = email;
 		this.url = url;
@@ -62,14 +55,6 @@ public class Contact {
 
 	public void setEnterprise(Enterprise enterprise) {
 		this.enterprise = enterprise;
-	}
-
-	public Responsible getResponsible() {
-		return responsible;
-	}
-
-	public void setResponsible(Responsible responsible) {
-		this.responsible = responsible;
 	}
 
 	public String getFullName() {
@@ -114,7 +99,7 @@ public class Contact {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, enterprise, fullName, id, linkedin, phone, responsible, url);
+		return Objects.hash(email, enterprise, fullName, id, linkedin, phone, url);
 	}
 
 	@Override
@@ -129,7 +114,7 @@ public class Contact {
 		return Objects.equals(email, other.email) && Objects.equals(enterprise, other.enterprise)
 				&& Objects.equals(fullName, other.fullName) && Objects.equals(id, other.id)
 				&& Objects.equals(linkedin, other.linkedin) && Objects.equals(phone, other.phone)
-				&& Objects.equals(responsible, other.responsible) && Objects.equals(url, other.url);
+				&& Objects.equals(url, other.url);
 	}
 
 }

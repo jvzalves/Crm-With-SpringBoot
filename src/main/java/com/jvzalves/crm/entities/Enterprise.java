@@ -1,16 +1,14 @@
 package com.jvzalves.crm.entities;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -23,22 +21,17 @@ public class Enterprise {
 	private Long id;
 
 	@OneToMany(mappedBy = "enterprise", fetch = FetchType.LAZY)
-	private Set<Contact> contacts = new HashSet<>();
+	private List<Contact> contacts = new ArrayList<>();
 
 	@Column(name = "name_enterprise")
 	private String name;
-    
-	@ManyToOne
-	@JoinColumn(name = "responsible_id")
-	private Responsible responsible;
 
 	public Enterprise() {}
 
-	public Enterprise(Long id, Set<Contact> contacts, String name, Responsible responsible) {
+	public Enterprise(Long id, List<Contact> contacts, String name) {
 		this.id = id;
 		this.contacts = contacts;
 		this.name = name;
-		this.responsible = responsible;
 	}
 
 	public Long getId() {
@@ -49,11 +42,11 @@ public class Enterprise {
 		this.id = id;
 	}
 
-	public Set<Contact> getContacts() {
+	public List<Contact> getContacts() {
 		return contacts;
 	}
 
-	public void setContacts(Set<Contact> contacts) {
+	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
 	}
 
@@ -65,17 +58,9 @@ public class Enterprise {
 		this.name = name;
 	}
 
-	public Responsible getResponsible() {
-		return responsible;
-	}
-
-	public void setResponsible(Responsible responsible) {
-		this.responsible = responsible;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(contacts, id, name, responsible);
+		return Objects.hash(contacts, id, name);
 	}
 
 	@Override
@@ -88,6 +73,7 @@ public class Enterprise {
 			return false;
 		Enterprise other = (Enterprise) obj;
 		return Objects.equals(contacts, other.contacts) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(responsible, other.responsible);
+				&& Objects.equals(name, other.name);
 	}
+
 }

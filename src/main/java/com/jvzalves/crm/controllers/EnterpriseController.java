@@ -19,7 +19,7 @@ import com.jvzalves.crm.entities.Enterprise;
 import com.jvzalves.crm.services.EnterpriseService;
 
 @RestController
-@RequestMapping(value = "/enterprises")
+@RequestMapping(value = "/api/v1/enterprises")
 public class EnterpriseController {
 	@Autowired
 	private EnterpriseService enterpriseService;

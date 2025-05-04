@@ -19,7 +19,7 @@ import com.jvzalves.crm.entities.Contact;
 import com.jvzalves.crm.services.ContactService;
 
 @RestController
-@RequestMapping(value = "/contacts")
+@RequestMapping(value = "/api/v1/contacts")
 public class ContactController {
 	
 	@Autowired
@@ -38,9 +38,9 @@ public class ContactController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ContactDTO> createContact(@RequestBody Contact contact){
-		   ContactDTO dto = contactService.createContact(contact);
-		   return new ResponseEntity<>(dto, HttpStatus.CREATED);
+	public ResponseEntity<ContactDTO> createContact(@RequestBody ContactDTO dto){
+		   ContactDTO contactDTO = contactService.createContact(dto);
+		   return new ResponseEntity<>(contactDTO, HttpStatus.CREATED);
 	}
 	
 	@PutMapping

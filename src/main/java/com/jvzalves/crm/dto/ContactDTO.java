@@ -5,28 +5,26 @@ import java.util.Objects;
 import com.jvzalves.crm.entities.Contact;
 
 public class ContactDTO {
-	  
-    private Long id;
-    private Long enterpriseId;
-    private Long responsibleId;
-    private String fullName;
-    private String email;
-    private String url;
-    private String linkedin;
-    private String phone;
 
-    public ContactDTO() {}
+	private Long id;
+	private Long enterpriseId;
+	private String fullName;
+	private String email;
+	private String url;
+	private String linkedin;
+	private String phone;
 
-    public ContactDTO(Contact entity) {
-        this.id = entity.getId();
-        this.enterpriseId = (entity.getEnterprise() != null) ? entity.getEnterprise().getId() : null;
-        this.responsibleId = (entity.getResponsible() != null) ? entity.getResponsible().getId() : null;
-        this.fullName = entity.getFullName();
-        this.email = entity.getEmail();
-        this.url = entity.getUrl();
-        this.linkedin = entity.getLinkedin();
-        this.phone = entity.getPhone();
-    }
+	public ContactDTO() {	}
+
+	public ContactDTO(Contact entity) {
+		this.id = entity.getId();
+		this.enterpriseId = entity.getEnterprise().getId();
+		this.fullName = entity.getFullName();
+		this.email = entity.getEmail();
+		this.url = entity.getUrl();
+		this.linkedin = entity.getLinkedin();
+		this.phone = entity.getPhone();
+	}
 
 	public Long getId() {
 		return id;
@@ -42,14 +40,6 @@ public class ContactDTO {
 
 	public void setEnterpriseId(Long enterpriseId) {
 		this.enterpriseId = enterpriseId;
-	}
-
-	public Long getResponsibleId() {
-		return responsibleId;
-	}
-
-	public void setResponsibleId(Long responsibleId) {
-		this.responsibleId = responsibleId;
 	}
 
 	public String getFullName() {
@@ -94,7 +84,7 @@ public class ContactDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, enterpriseId, fullName, id, linkedin, phone, responsibleId, url);
+		return Objects.hash(email, enterpriseId, fullName, id, linkedin, phone, url);
 	}
 
 	@Override
@@ -109,6 +99,7 @@ public class ContactDTO {
 		return Objects.equals(email, other.email) && Objects.equals(enterpriseId, other.enterpriseId)
 				&& Objects.equals(fullName, other.fullName) && Objects.equals(id, other.id)
 				&& Objects.equals(linkedin, other.linkedin) && Objects.equals(phone, other.phone)
-				&& Objects.equals(responsibleId, other.responsibleId) && Objects.equals(url, other.url);
+				&& Objects.equals(url, other.url);
 	}
+
 }

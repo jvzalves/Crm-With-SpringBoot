@@ -7,15 +7,13 @@ import com.jvzalves.crm.entities.Enterprise;
 public class EnterpriseDTO {
 	
 	private Long id;
-    private Long responsibleId;
     private String name;
  
     public EnterpriseDTO () {}
 
 	public EnterpriseDTO(Enterprise entity) {
-		this.id = entity.getId();
-		this.name = entity.getName();
-		this.responsibleId = (entity.getResponsible() != null) ? entity.getResponsible().getId() : null;
+		id = entity.getId();
+		name = entity.getName();
 	}
 
 	public Long getId() {
@@ -34,17 +32,9 @@ public class EnterpriseDTO {
 		this.name = name;
 	}
 
-	public Long getResponsibleId() {
-		return responsibleId;
-	}
-
-	public void setResponsibleId(Long responsibleId) {
-		this.responsibleId = responsibleId;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, responsibleId);
+		return Objects.hash(id, name);
 	}
 
 	@Override
@@ -56,7 +46,6 @@ public class EnterpriseDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		EnterpriseDTO other = (EnterpriseDTO) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(responsibleId, other.responsibleId);
+		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 }

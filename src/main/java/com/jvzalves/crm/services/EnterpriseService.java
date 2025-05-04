@@ -59,7 +59,6 @@ public class EnterpriseService {
 
 			updateExistingEnterprise.setId(enterprise.getId());
 			updateExistingEnterprise.setName(enterprise.getName());
-			updateExistingEnterprise.setResponsible(enterprise.getResponsible());
 
 			Enterprise updateEnterprise = enterpriseRepository.save(updateExistingEnterprise);
 			return new EnterpriseDTO(updateEnterprise);
