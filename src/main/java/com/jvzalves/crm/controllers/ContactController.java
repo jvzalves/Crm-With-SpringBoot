@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jvzalves.crm.dto.ContactDTO;
-import com.jvzalves.crm.entities.Contact;
 import com.jvzalves.crm.services.ContactService;
 
 @RestController
-@RequestMapping(value = "/api/v1/contacts")
+@RequestMapping(value = "/api/v2/contacts")
 public class ContactController {
 	
 	@Autowired
@@ -44,9 +43,9 @@ public class ContactController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<ContactDTO> updateContact(@RequestBody Contact contact){
-		ContactDTO dto = contactService.updateContact(contact);
-		return new ResponseEntity<>(dto, HttpStatus.OK); 
+	public ResponseEntity<ContactDTO> updateContact(@RequestBody ContactDTO dto){
+		ContactDTO contactDTO= contactService.updateContact(dto);
+		return new ResponseEntity<>(contactDTO, HttpStatus.OK); 
 	}
 	
 	@DeleteMapping("/{id}")

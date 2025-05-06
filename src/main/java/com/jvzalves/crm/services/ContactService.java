@@ -50,7 +50,7 @@ public class ContactService {
 				.orElseThrow(() -> new EntityNotFoundException("Enterprise not found"));
 
 		Contact contact = new Contact();
-		
+
 		contact.setFullName(dto.getFullName());
 		contact.setEmail(dto.getEmail());
 		contact.setUrl(dto.getUrl());
@@ -63,30 +63,28 @@ public class ContactService {
 	}
 
 	@Transactional
-	public ContactDTO updateContact(@RequestBody Contact contact) {
-		if (contact == null) {
-			throw new RequiredObjectIsNullNotFoundException("It is not allowed to apdate to contact");
+	public ContactDTO updateContact(@RequestBody ContactDTO dto) {
+		if (dto == null) {
+			throw new RequiredObjectIsNullNotFoundException("It is not allowed to persist a null object");
 		}
 
-		try {
+		Contact updateExistingContact = contactRepository.findById(dto.getId())
+				.orElseThrow(() -> new RequiredObjectIsNullNotFoundException("Contact not found" + dto.getId()));
 
-			Contact updateExistingContact = contactRepository.findById(contact.getId()).orElseThrow(
-					() -> new RequiredObjectIsNullNotFoundException("Contact not found" + contact.getId()));
+		updateExistingContact.setId(dto.getId());
+		updateExistingContact.setFullName(dto.getFullName());
+		updateExistingContact.setEmail(dto.getEmail());
+		updateExistingContact.setUrl(dto.getUrl());
+		updateExistingContact.setLinkedin(dto.getLinkedin());
+		updateExistingContact.setPhone(dto.getPhone());
 
-			updateExistingContact.setId(contact.getId());
-			updateExistingContact.setFullName(contact.getFullName());
-			updateExistingContact.setUrl(contact.getUrl());
-			updateExistingContact.setEmail(contact.getEmail());
-			updateExistingContact.setLinkedin(contact.getLinkedin());
-			updateExistingContact.setPhone(contact.getPhone());
-			updateExistingContact.setEnterprise(contact.getEnterprise());
+		Enterprise enterprise = enterpriseRepository.findById(dto.getEnterpriseId()).orElseThrow(
+				() -> new RequiredObjectIsNullNotFoundException("Enterprise not found: " + dto.getEnterpriseId()));
 
-			Contact updateContact = contactRepository.save(updateExistingContact);
-			return new ContactDTO(updateContact);
+		updateExistingContact.setEnterprise(enterprise);
 
-		} catch (Exception e) {
-			throw new RequiredObjectIsNullNotFoundException("Error updating contact");
-		}
+		Contact saved = contactRepository.save(updateExistingContact);
+		return new ContactDTO(saved);
 	}
 
 	@Transactional
