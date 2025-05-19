@@ -18,7 +18,7 @@ import com.jvzalves.crm.dto.ContactDTO;
 import com.jvzalves.crm.services.ContactService;
 
 @RestController
-@RequestMapping(value = "/api/v2/contacts")
+@RequestMapping(value = "/api/v1/contacts")
 public class ContactController {
 	
 	@Autowired
