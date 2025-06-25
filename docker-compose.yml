@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  db:
+    image: mysql:9.3.0
+    command: mysqld --default_authentication_plugin=mysql_native_password
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: admin123
+      MYSQL_DATABASE: crmwithspringboot
+    ports:
+      - "3308:3306"
+    expose:
+      - 3306
+    networks:
+      - crm-network
+    restart: always
+    build: ./crm
+    working_dir: ./crm
+
+  app:
+    image: jvzalves/crm-with-spring-boot
+    ports:
+      - "80:80"
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      SPRING.DATASOURCE.URL: jdbc:mysql://db:3306/crmwithspringboot?useTimezone=true&serverTimezone=UTC
+      SPRING.DATASOURCE.URL.USERNAME: root
+      SPRING.DATASOURCE.URL.PASSWORD: 1234
+    command: mvn spring-boot:run
+    depends_on:
+      - db
+    networks:
+      - crm-network
+networks:
+  crm-network:
+    driver: bridge
+

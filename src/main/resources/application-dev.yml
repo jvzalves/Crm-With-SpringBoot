@@ -1,3 +1,7 @@
+#Docker Connection
+server:
+  port: 80
+
 # MySQL Connection
 spring:
   datasource:
