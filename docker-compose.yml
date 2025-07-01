@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   db:
-    image: mysql:9.3.0
+    image: mysql:8.0
     command: mysqld --default_authentication_plugin=mysql_native_password
     environment:
       TZ: America/Sao_Paulo
@@ -17,19 +17,15 @@ services:
     networks:
       - crm-network
     restart: always
-    build: ./crm
-    working_dir: ./crm
-
   app:
-    image: jvzalves/crm-with-spring-boot
+    build: .
     ports:
-      - "80:80"
+      - "8080:8080"
     restart: always
     environment:
-      TZ: America/Sao_Paulo
-      SPRING.DATASOURCE.URL: jdbc:mysql://db:3306/crmwithspringboot?useTimezone=true&serverTimezone=UTC
-      SPRING.DATASOURCE.URL.USERNAME: root
-      SPRING.DATASOURCE.URL.PASSWORD: 1234
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/crmwithspringboot?useTimezone=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin123
     command: mvn spring-boot:run
     depends_on:
       - db
@@ -38,4 +34,3 @@ services:
 networks:
   crm-network:
     driver: bridge
-

@@ -1,6 +1,6 @@
 #Docker Connection
 server:
-  port: 80
+  port: 8080
 
 # MySQL Connection
 spring:
