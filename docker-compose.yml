@@ -16,7 +16,8 @@ services:
       - 3306
     networks:
       - crm-network
-    restart: always
+      image: jvzalves/crm-with-spring-boot
+      restart: always
   app:
     build: .
     ports:
@@ -34,3 +35,7 @@ services:
 networks:
   crm-network:
     driver: bridge
+    
+  
+      
+      
