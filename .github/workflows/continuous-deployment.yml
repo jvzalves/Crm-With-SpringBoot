@@ -41,3 +41,4 @@ jobs:
           docker tag ${{ secrets.DOCKER_USERNAME }}/crm-with-spring-boot:latest crm-app:${{ github.run_id }}
           docker push ${{ secrets.DOCKER_USERNAME }}/crm-with-spring-boot:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/crm-with-spring-boot:${{ github.run_id }}
+   
