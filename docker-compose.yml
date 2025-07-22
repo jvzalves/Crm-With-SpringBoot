@@ -16,26 +16,22 @@ services:
       - 3306
     networks:
       - crm-network
-      image: jvzalves/crm-with-spring-boot
-      restart: always
+
   app:
-    build: .
+    image: jvzalves/crm-with-spring-boot 
+    restart: always
     ports:
       - "8080:8080"
-    restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/crmwithspringboot?useTimezone=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: admin123
-    command: mvn spring-boot:run
     depends_on:
       - db
     networks:
       - crm-network
+    command: java -jar app.jar   
+
 networks:
   crm-network:
     driver: bridge
-    
-  
-      
-      
