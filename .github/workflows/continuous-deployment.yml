@@ -31,11 +31,9 @@ jobs:
         run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
       - name: Build Application .jar
-        working-directory: ./Crm-With-SpringBoot
         run: mvn clean package
 
       - name: Docker Compose Build 
-        working-directory: ./Crm-With-SpringBoot
         run: docker compose build
 
       - name: Push to Docker Hub Container Registry
