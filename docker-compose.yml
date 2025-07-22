@@ -18,7 +18,7 @@ services:
       - crm-network
 
   app:
-    image: jvzalves/crm-with-spring-boot:latest
+    image: jvzalves/crm-with-spring-boot
     restart: always
     ports:
       - "8080:8080"
