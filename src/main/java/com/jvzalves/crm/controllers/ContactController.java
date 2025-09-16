@@ -20,34 +20,40 @@ import com.jvzalves.crm.services.ContactService;
 @RestController
 @RequestMapping(value = "/api/v1/contacts")
 public class ContactController {
-	
+
 	@Autowired
 	private ContactService contactService;
-	
+
 	@GetMapping(value = "/{id}")
-	public ContactDTO findById(@PathVariable Long id){
+	public ContactDTO findById(@PathVariable Long id) {
 		ContactDTO result = contactService.findById(id);
 		return result;
 	}
-	
+
 	@GetMapping
-	public List<ContactDTO> findAll(){
+	public List<ContactDTO> findAll() {
 		List<ContactDTO> result = contactService.findAll();
 		return result;
 	}
-	
+
+	@GetMapping(value = "/name/{name}")
+	public List<ContactDTO> findByName(@PathVariable String name) {
+	     List <ContactDTO> result = contactService.findByName(name);
+	     return result;
+	}
+
 	@PostMapping
-	public ResponseEntity<ContactDTO> createContact(@RequestBody ContactDTO dto){
-		   ContactDTO contactDTO = contactService.createContact(dto);
-		   return new ResponseEntity<>(contactDTO, HttpStatus.CREATED);
+	public ResponseEntity<ContactDTO> createContact(@RequestBody ContactDTO dto) {
+		ContactDTO contactDTO = contactService.createContact(dto);
+		return new ResponseEntity<>(contactDTO, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<ContactDTO> updateContact(@RequestBody ContactDTO dto){
-		ContactDTO contactDTO= contactService.updateContact(dto);
-		return new ResponseEntity<>(contactDTO, HttpStatus.OK); 
+	public ResponseEntity<ContactDTO> updateContact(@RequestBody ContactDTO dto) {
+		ContactDTO contactDTO = contactService.updateContact(dto);
+		return new ResponseEntity<>(contactDTO, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
 		contactService.deleteById(id);

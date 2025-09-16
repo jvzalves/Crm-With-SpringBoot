@@ -40,6 +40,12 @@ public class ContactService {
 		return dto;
 	}
 
+	@Transactional(readOnly = true)
+	public List<ContactDTO> findByName(String name) {
+		List<Contact> result = contactRepository.findByName(name);
+		return result.stream().map(x -> new ContactDTO(x)).toList();
+	}
+
 	@Transactional
 	public ContactDTO createContact(@RequestBody ContactDTO dto) {
 		if (dto == null) {
