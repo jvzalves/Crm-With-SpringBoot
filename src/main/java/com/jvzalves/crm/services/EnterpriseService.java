@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.jvzalves.crm.dto.ContactDTO;
 import com.jvzalves.crm.dto.EnterpriseDTO;
+import com.jvzalves.crm.entities.Contact;
 import com.jvzalves.crm.entities.Enterprise;
 import com.jvzalves.crm.repositories.EnterpriseRepository;
 
@@ -32,6 +34,12 @@ public class EnterpriseService {
 		List<Enterprise> result = enterpriseRepository.findAll();
 		List<EnterpriseDTO> dto = result.stream().map(x -> new EnterpriseDTO(x)).toList();
 		return dto;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<EnterpriseDTO> findByName(String name) {
+		List<Enterprise> result = enterpriseRepository.findByName(name);
+		return result.stream().map(x -> new EnterpriseDTO(x)).toList();
 	}
 
 	@Transactional

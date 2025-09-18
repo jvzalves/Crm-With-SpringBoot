@@ -36,6 +36,12 @@ public class EnterpriseController {
 		return result;
 	}
 	
+	@GetMapping(value = "/name/{name}")
+	public List<EnterpriseDTO> findByName(@PathVariable String name) {
+	     List <EnterpriseDTO> result = enterpriseService.findByName(name);
+	     return result;
+	}
+	
 	@PostMapping
 	public ResponseEntity<EnterpriseDTO> createEnterprise(@RequestBody Enterprise enterprise){
 		EnterpriseDTO dto = enterpriseService.createEnterprise(enterprise);
