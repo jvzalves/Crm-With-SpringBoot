@@ -1,8 +1,10 @@
 import React from 'react';
+import Login from './pages/login';
+import './global.css';
 
 export default function App() {
   return (
-    <h1> Olá</h1>
+    <Login />
   );
 }
 
