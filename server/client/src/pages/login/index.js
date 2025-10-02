@@ -5,15 +5,21 @@ import crmicon from '../../assets/crmicon.jpg';
 export default function Login() {
     return (
         <div className="login-container">
-            <section className="form">
+            <div className="login-box">
+                <img src={crmicon} alt="CRM" className="logo" />
+
+                <h1>Entrar</h1>
+                <p className="subtitle">Preencha suas informações abaixo</p>
+
                 <form>
-                    <h1>Preencha as informações abaixo</h1>
-                    <input type="email" placeholder="E-mail" />
-                    <input type="password" placeholder="Senha" />
-                    <button type="submit">Entrar</button>
+                    <input className="input-email" type="email" placeholder="Email" />
+                    <input className="input-password" type="password" placeholder="Senha" />
+
+                    <button className="button" type="submit">Entrar</button>
                 </form>
-            </section>
-            <img src={crmicon} alt="login" />
+
+                <a href="/" className="forgot-password">Esqueceu sua senha?</a>
+            </div>
         </div>
     )
 }
