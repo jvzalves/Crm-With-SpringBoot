@@ -10,16 +10,6 @@ body {
     min-height: 100vh;
 }
 
-.container p {
-    align-items: center;
-    justify-content: space-between;
-    font-size: 25px;
-    margin-left: 680px;
-    margin-bottom: 20px;
-    color: #28c76f;
-    cursor: pointer;
-}
-
 .button-off {
     cursor: pointer;
 }
@@ -52,7 +42,6 @@ body {
     font-size: 25px;
 }
 
-/* Container */
 .container {
     margin: 40px auto;
     width: 1000px;
@@ -61,7 +50,19 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     padding: 20px 30px;
+
 }
+
+.add-contact {
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25px;
+    margin-left: 675px;
+    margin-bottom: 40px;
+    color: #28c76f;
+    cursor: pointer;
+}
+
 
 /* Título */
 h1 {
@@ -124,25 +125,27 @@ h1 {
     color: #28c76f;
 }
 
-/* Detalhes */
 .contact-details {
-    display: none;
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 8px;
+    margin-top: 10px;
+    padding: 15px;
     background: #f9fafc;
     border: 1px solid #eee;
+    border-radius: 8px;
 }
 
-.contact-details.active {
-    display: block;
-}
+.contact-details-active {}
 
-/* Ações */
 .actions {
     margin-top: 15px;
     display: flex;
     gap: 15px;
+}
+
+.contact-details.active p strong {
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 1000px;
+
 }
 
 button {
@@ -157,13 +160,13 @@ button {
 .btn-edit {
     background: #28c76f;
     color: #fff;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .btn-delete {
     background: #ff4d4d;
     color: #fff;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .btn-edit:hover {

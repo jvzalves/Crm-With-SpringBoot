@@ -27,7 +27,7 @@ export default function Contact() {
 
             <div className="container">
                 <h1>Contatos</h1>
-                <p>Adicionar novo contato</p>
+                <p className="add-contact">Adicionar novo contato</p>
                 <ul className="contact-list" id="contactList">
                     <li className="contact-item" onClick={() => toggleDetails("contato1")}>
                         <span>
@@ -36,7 +36,7 @@ export default function Contact() {
                         <span>Empresa X</span>
                     </li>
                     {activeContact === "contato1" && (
-                        <div id="contato1" className="contact-details active">
+                        <div id="contato1" className="contact-details-active">
                             <p>
                                 <strong>Celular:</strong> (11) 99999-1111
                             </p>
@@ -61,7 +61,7 @@ export default function Contact() {
                         <span>Empresa Y</span>
                     </li>
                     {activeContact === "contato2" && (
-                        <div id="contato2" className="contact-details active">
+                        <div id="contato2" className="contact-details-active">
                             <p>
                                 <strong>Celular:</strong> (21) 98888-2222
                             </p>

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/login";
-import Contact from "./pages/contact";
+import Login from "./pages/Login";
+import Contact from "./pages/Contact";
+import NewContact from "./pages/NewContact";
 
 export default function AppRoutes() {
     return (
@@ -8,6 +9,7 @@ export default function AppRoutes() {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/contacts" element={<Contact />} />
+                <Route path="/contacts/new" element={<NewContact />} />
             </Routes>
         </BrowserRouter>
     );
