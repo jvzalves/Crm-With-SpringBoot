@@ -27,6 +27,7 @@ export default function Contact() {
 
             <div className="container">
                 <h1>Contatos</h1>
+                <p>Adicionar novo contato</p>
                 <ul className="contact-list" id="contactList">
                     <li className="contact-item" onClick={() => toggleDetails("contato1")}>
                         <span>

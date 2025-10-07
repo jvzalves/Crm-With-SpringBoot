@@ -10,6 +10,16 @@ body {
     min-height: 100vh;
 }
 
+.container p {
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25px;
+    margin-left: 680px;
+    margin-bottom: 20px;
+    color: #28c76f;
+    cursor: pointer;
+}
+
 .button-off {
     cursor: pointer;
 }
@@ -31,7 +41,7 @@ body {
 
 .user-greeting {
     font-weight: bold;
-    color: #333;
+    color: #28c76f;
 }
 
 #search {
