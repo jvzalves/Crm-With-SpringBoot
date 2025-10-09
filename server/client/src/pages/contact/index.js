@@ -48,8 +48,8 @@ export default function Contact() {
                                 <a href="#">linkedin.com/in/joaosilva</a>
                             </p>
                             <div className="actions">
-                                <button className="btn-edit">Editar</button>
-                                <button className="btn-delete">Excluir</button>
+                                <button className="btn-edit" type="button">Editar</button>
+                                <button className="btn-delete" type="button">Excluir</button>
                             </div>
                         </div>
                     )}
