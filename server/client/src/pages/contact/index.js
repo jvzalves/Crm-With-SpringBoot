@@ -21,13 +21,19 @@ export default function Contact() {
                 <span className="user-greeting">Olá, Sicrano!</span>
                 <div className="actions">
                     <input type="text" id="search" placeholder="Pesquisar contatos..." />
-                    <FiPower className="button-off" size={40} color="#251fc5" />
+                    <Link to="/">
+                        <FiPower className="button-off" size={40} color="#1fc52dff" />
+                    </Link>
                 </div>
             </header>
 
             <div className="container">
                 <h1>Contatos</h1>
-                <p className="add-contact">Adicionar novo contato</p>
+
+                <Link to="/contacts/new" className="add-contact">
+                    <span> Adiconar novo contato</span>
+                </Link>
+
                 <ul className="contact-list" id="contactList">
                     <li className="contact-item" onClick={() => toggleDetails("contato1")}>
                         <span>

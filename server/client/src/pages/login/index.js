@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles.css';
 import crmicon from '../../assets/crmicon.jpg';
 
@@ -14,8 +15,9 @@ export default function Login() {
                 <form>
                     <input className="input-email" type="email" placeholder="Email" />
                     <input className="input-password" type="password" placeholder="Senha" />
-
-                    <button className="button" type="submit">Entrar</button>
+                    <Link to="/contacts">
+                        <button className="button" type="submit">Entrar</button>
+                    </Link>
                 </form>
 
                 <a href="/" className="forgot-password">Esqueceu sua senha?</a>
